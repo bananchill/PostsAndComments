@@ -1,0 +1,28 @@
+query SHOW_POST_QUERY($postId: Int!) {
+  showPost(id: $postId) {
+    id
+    owner {
+      id
+      nickname
+      first_name
+      last_name
+      avatar_url
+    }
+    group_id
+    name
+    text
+    rating
+    tags {
+      id
+      name
+    }
+    is_anonymously
+    bgcolor
+    image_url
+    comments_count
+    reposts_count
+    is_liked
+    is_favorite
+    created_at
+  }
+}
