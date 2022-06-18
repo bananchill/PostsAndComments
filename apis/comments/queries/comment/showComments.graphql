@@ -1,0 +1,13 @@
+query SHOW_COMMENTS_QUERY($postId: Int!) {
+  showPostComments(postID:$postId){
+    id
+    post_id
+    parent_id
+    owner{
+      first_name
+      last_name
+      nickname
+    }
+    text
+  }
+}

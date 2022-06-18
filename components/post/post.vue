@@ -1,27 +1,28 @@
 <template>
   <div class="data__wrapper" v-if="post">
     <div class="data__item">
-      <h3>
-        <span> {{ post.name  }} </span>
-      </h3>
-      <div class="data__text">
-        <span> {{ post.text }} </span>
-      </div>
+      <nuxt-link :to="`/post/${post.id}`" class="router__post ">
+        <h3>
+          <span> {{ post.name }} </span>
+        </h3>
+        <div class="data__text">
+          <span> {{ post.text }} </span>
+        </div>
+      </nuxt-link>
       <div class="user">
         <div class="image">
           <img src="../../static/icon_user.png" alt="">
         </div>
         <div class="user__about">
-          <!--          <div class="user__quest">-->
-          <!--            <span> Спрашивает </span>-->
-          <!--            {{ post.owner.first_name }}-->
-          <!--          </div>-->
-          <!--          <div class="user__name">-->
-          <!--            {{ post.owner.first_name }}-->
-          <!--          </div>-->
+          <div class="user__quest">
+            <span> Спрашивает </span>
+            {{ post.owner.first_name }}
+          </div>
+          <div class="user__name">
+            {{ post.owner.first_name }}
+          </div>
         </div>
       </div>
-
       <div class="button__label">
         <button class="question__button" @click="openAnswer()"><span> Ответить </span></button>
       </div>
@@ -31,13 +32,18 @@
       </textarea>
         </div>
       </div>
+
+      <div class="u__comments">
+
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'post',
+  name: 'OnePost',
   props: {
     post: {
       type: [Object, null],
@@ -48,6 +54,9 @@ export default {
   data () {
     return {}
   },
+  mounted () {
+    console.log(this.$nuxt.$route.path)
+  },
   methods: {
     openAnswer () {
     }
@@ -57,13 +66,13 @@ export default {
 
 <style scoped lang="scss">
 .data__wrapper {
-
   display: block;
   flex-row: row;
   flex-basis: 100%;
   flex-wrap: wrap;
   justify-content: space-between;
   width: 400px;
+  min-width: 400px;
   word-break: break-all;
 
   .data__item {
@@ -73,7 +82,7 @@ export default {
     margin-top: 0.2rem;
 
     .router__post {
-      //cursor: default;
+      cursor: default;
       color: black;
       text-decoration: none;
     }

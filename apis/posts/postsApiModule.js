@@ -1,7 +1,8 @@
 /* eslint max-classes-per-file: ["error", 2] */
 
-import SHOW_POST_QUERY from './queries/showPost.graphql';
-import SHOW_POSTS_QUERY from './queries/showPosts.graphql';
+import SHOW_POST_QUERY from './queries/post/showPost.graphql';
+import SHOW_POSTS_QUERY from './queries/post/showPosts.graphql';
+import SHOW_COMMENTS_QUERY from './queries/comment/showComments.graphql';
 
 class PostsApiImpl {
   name = 'posts';
@@ -60,5 +61,6 @@ export default class PostsApiModule {
       const api = new PostsApiImpl(this.#pLog, _app.gqlAdapter);
       return api;
     });
+
   }
 }

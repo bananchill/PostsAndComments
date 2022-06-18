@@ -12,12 +12,10 @@
 
 <script>
 // Components
-import post from '@/components/post/post'
 
 export default {
-  name: 'posts',
+  name: 'AllPost',
   components:{
-    post
   },
   data(){
     return {
@@ -29,7 +27,6 @@ export default {
       return this.$sApp.interfaces.postsApi;
     }
   },
-
   async mounted () {
     await this.refreshAsync();
   },
