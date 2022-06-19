@@ -1,8 +1,7 @@
 /* eslint max-classes-per-file: ["error", 2] */
 
-import SHOW_POST_QUERY from './queries/post/showPost.graphql';
-import SHOW_POSTS_QUERY from './queries/post/showPosts.graphql';
-import SHOW_COMMENTS_QUERY from './queries/comment/showComments.graphql';
+import SHOW_POST_QUERY from './queries/post/showPost.graphql'
+import SHOW_POSTS_QUERY from './queries/post/showPosts.graphql'
 
 class PostsApiImpl {
   name = 'posts';
@@ -22,12 +21,11 @@ class PostsApiImpl {
 
   async getInfoAsync(_postId) {
     const postId = parseInt(_postId, 10);
-    const res = await this.#pGqlAdapter.getQueryAsync({
+    return await this.#pGqlAdapter.getQueryAsync({
       variables: { postId },
       query: SHOW_POST_QUERY,
       operationDescription: `get ${_postId} post`,
     });
-    return res;
   }
 
   async getListAsync(_variables) {
@@ -38,12 +36,11 @@ class PostsApiImpl {
       sortType: 'NEW',
     };
     const variables = Object.assign(defaultParams, _variables);
-    const res = await this.#pGqlAdapter.getQueryAsync({
+    return await this.#pGqlAdapter.getQueryAsync({
       variables,
       query: SHOW_POSTS_QUERY,
       operationDescription: 'get post list',
     });
-    return res;
   }
 
 }
@@ -56,10 +53,10 @@ export default class PostsApiModule {
     this.#pLog = _log;
   }
 
+
   install(_app) {
     _app.interfaces.register('postsApi', () => {
-      const api = new PostsApiImpl(this.#pLog, _app.gqlAdapter);
-      return api;
+      return new PostsApiImpl(this.#pLog, _app.gqlAdapter);
     });
 
   }

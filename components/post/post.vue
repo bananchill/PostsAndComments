@@ -33,10 +33,6 @@
         </div>
       </div>
 
-      <div class="u__comments">
-
-      </div>
-
     </div>
   </div>
 </template>
@@ -55,7 +51,7 @@ export default {
     return {}
   },
   mounted () {
-    console.log(this.$nuxt.$route.path)
+
   },
   methods: {
     openAnswer () {

@@ -2,7 +2,7 @@
   <div>
       <div class="data__item">
         <post
-          v-for="post in info"
+          v-for="post in posts"
           :post="post"
           :key="post.id"
         />
@@ -19,7 +19,7 @@ export default {
   },
   data(){
     return {
-      info: null
+      posts: null
     }
   },
   computed: {
@@ -35,10 +35,10 @@ export default {
       await this.getPostsAsync()
     },
     async getPostsAsync(){
-
       try {
         const res = await this.postsApi.getListAsync();
-        this.info = res.items;
+        this.posts = res.items;
+        console.log(this.posts)
       }
       catch (e) {
         console.error(`get posts failed: ${e}`)

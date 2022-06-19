@@ -1,6 +1,6 @@
 <template>
   <div>
-   <post v-if="info" :post="info" />
+   <post v-if="post" :post="post"/>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
   data () {
     return {
       id: this.$route.params.id,
-      info: null
+      post: null
     }
   },
   async mounted () {
@@ -19,19 +19,29 @@ export default {
   computed: {
     postsApi () {
       return this.$sApp.interfaces.postsApi
+    },
+    commentsApi () {
+      return this.$sApp.interfaces.commentsApi
     }
   },
   methods: {
     async refreshAsync () {
-      await this.getPostsAsync()
+      await this.getPostAsync()
+      await this.getCommentsAsync()
     },
-    async getPostsAsync () {
+    async getPostAsync () {
       try {
-        const res = await this.postsApi.getInfoAsync(this.id)
-        this.info = res
-        console.log(res)
+        this.post = await this.postsApi.getInfoAsync(this.id)
       } catch (e) {
         console.error(`get posts failed: ${e}`)
+      }
+    },
+    async getCommentsAsync () {
+      try {
+        this.post.comments = await this.commentsApi.getInfoAsync(this.id)
+        console.log(this.post.comments)
+      } catch (e) {
+        console.error(`get comments failed: ${e}`)
       }
     }
   }
