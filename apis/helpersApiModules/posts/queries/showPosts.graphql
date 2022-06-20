@@ -1,0 +1,44 @@
+query SHOW_POSTS_QUERY($sortType: PostsSort = NEW, $filters: PostsFilters = { tags: [] }, $limit: Int = 20) {
+  showPosts(filters: $filters, sort: $sortType, limit: $limit) {
+    items {
+      id
+      owner {
+        id
+        nickname
+        first_name
+        last_name
+        avatar_url
+      }
+      group_id
+      name
+      text
+      rating
+      tags {
+        id
+        name
+      }
+      is_anonymously
+      bgcolor
+      image_url
+#      comments {
+#        id
+#        owner {
+#          id
+#          nickname
+#          first_name
+#          last_name
+#          avatar_url
+#        }
+#        post_id
+#        text
+#        rating
+#        parent_id
+#      }
+#      comments_count
+      reposts_count
+      is_liked
+      is_favorite
+      created_at
+    }
+  }
+}

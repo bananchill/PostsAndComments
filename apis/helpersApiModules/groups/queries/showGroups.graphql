@@ -1,0 +1,18 @@
+query SHOW_GROUPS_QUERY($sortType: GroupsSort = NEW, $filters: GroupsFilters = { tags: [] }, $limit: Int = 20, $page: Int = 1) {
+  showGroups(filters: $filters, sort: $sortType, limit: $limit, page: $page) {
+    items {
+      id
+      user_id
+      is_subscribed
+      is_open
+      members{
+        id
+        nickname
+        first_name
+        last_name
+      }
+      name
+      description
+    }
+  }
+}

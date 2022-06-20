@@ -1,16 +1,19 @@
 <template>
   <div>
-   <post v-if="post" :post="post"/>
+    <post v-if="post" :post="post"/>
   </div>
 </template>
 
 <script>
+import TransformJson from '@/infrastructure/toolkit/transformationJSON'
+
 export default {
   name: 'pageOnePost',
   data () {
     return {
       id: this.$route.params.id,
-      post: null
+      post: null,
+
     }
   },
   async mounted () {
@@ -38,8 +41,15 @@ export default {
     },
     async getCommentsAsync () {
       try {
-        this.post.comments = await this.commentsApi.getInfoAsync(this.id)
-        console.log(this.post.comments)
+        const res = await this.commentsApi.getInfoAsync(this.id)
+        this.$set(this.post, 'comments', res)
+
+        const transData = new TransformJson()
+        let comments = this.post.comments
+        console.log(comments)
+        if (comments) {
+          comments = transData.transDataJson(comments)
+        }
       } catch (e) {
         console.error(`get comments failed: ${e}`)
       }

@@ -33,28 +33,47 @@
         </div>
       </div>
 
+      <div
+        v-if="post.comments"
+        class="u__comment"
+      >
+        <div class="u__comment_show"
+             v-for="comment in post.comments"
+             :key="comment.id"
+        >
+          {{ comment }}
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'OnePost',
+  components: {},
   props: {
     post: {
       type: [Object, null],
       required: true,
       default: null
-    }
+    },
   },
   data () {
-    return {}
+    return {
+      path: this.$route.path,
+      id: this.$route.params.id
+    }
   },
   mounted () {
-
+    this.transDataJson()
   },
   methods: {
-    openAnswer () {
+    transDataJson(){
+
+
     }
   }
 }
@@ -67,7 +86,7 @@ export default {
   flex-basis: 100%;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 400px;
+  width: 500px;
   min-width: 400px;
   word-break: break-all;
 

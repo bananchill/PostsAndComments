@@ -1,7 +1,7 @@
 /* eslint max-classes-per-file: ["error", 2] */
 
-import SHOW_POST_QUERY from './queries/post/showPost.graphql'
-import SHOW_POSTS_QUERY from './queries/post/showPosts.graphql'
+import SHOW_POST_QUERY from './queries/showPost.graphql'
+import SHOW_POSTS_QUERY from './queries/showPosts.graphql'
 
 class PostsApiImpl {
   name = 'posts';
