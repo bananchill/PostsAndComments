@@ -1,32 +1,68 @@
-export default class TransformationJSON {
-  constructor () {
-  }
 
-  transDataJson (_obj) {
-    let nestingData;
-    _obj.forEach( _value => {
-      let _res = null
-      if (_value.parent_id !== null) {
-        _res = _value
-        _res.child = this.getChildElement(_obj.next(), _value)
+
+const defaultConfig = {
+  id: 'id',
+  parent: 'parent_id',
+  children: 'children',
+};
+
+function initPush(arrayName, obj, toPush) {
+  if (obj[arrayName] === undefined) {
+    obj[arrayName] = [];
+  }
+  obj[arrayName].push(toPush);
+}
+
+function multiInitPush(arrayName, obj, toPushArray) {
+  let len = toPushArray.length;
+  if (obj[arrayName] === undefined) {
+    obj[arrayName] = [];
+  }
+  while (len-- > 0) {
+    obj[arrayName].push(toPushArray.shift());
+  }
+}
+
+ export function convert(flat, _config = {}) {
+  const config = { ...defaultConfig, ..._config };
+  const temp = {};
+  const roots = [];
+  const pendingChildOf = {};
+  let i = 0;
+
+  let len;
+  let id;
+  let parent;
+  let nested;
+  let flatEl;
+
+  for (i, len = flat.length; i < len; i += 1) {
+
+    flatEl = flat[i];
+    id = flatEl[config.id];
+    parent = flatEl[config.parent];
+    temp[id] = flatEl;
+    console.log(flatEl + ':'+ id + ':'+ parent + ':'+ temp[id] + ':')
+    if (parent === undefined || parent === null) {
+      roots.push(flatEl);
+    } else {
+      if (temp[parent] !== undefined) {
+        initPush(config.children, temp[parent], flatEl);
+      } else {
+        initPush(parent, pendingChildOf, flatEl);
       }
-      if(_res != null )
-        nestingData.push(_res)
-    })
-    console.log(nestingData)
-    return nestingData
+      delete flatEl[config.parent];
+    }
+    if (pendingChildOf[id] !== undefined) {
+      multiInitPush(config.children, flatEl, pendingChildOf[id]);
+    }
   }
 
-  getChildElement(_obj, _parent){
-    const _childElem =  _obj.map(_value=> {
-      let _id = _parent.id
-      let _res = {}
-
-
-      return _res
-    })
-
+  if (roots.length >= 1) {
+    nested = {};
+    nested[config.children] = roots;
+  } else {
+    nested = null;
   }
-
-
+  return nested;
 }

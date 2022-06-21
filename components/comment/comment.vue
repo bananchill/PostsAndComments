@@ -1,5 +1,14 @@
 <template>
-  <div></div>
+  <div
+    class="u__comment"
+  >
+    <div class="u__comment_show"
+
+    >
+      {{ comment }}
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -7,12 +16,12 @@ export default {
   name: 'ShowComment',
   props: {
     comment: {
-      type: [Object, null],
+      type: Object,
       required: true,
-      default: null
+      default: ()=>{}
     },
     mounted(){
-      console.log(this.comment)
+      console.log(this.comment.children)
     }
   }
 }

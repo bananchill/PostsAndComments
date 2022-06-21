@@ -33,18 +33,9 @@
         </div>
       </div>
 
-      <div
-        v-if="post.comments"
-        class="u__comment"
-      >
-        <div class="u__comment_show"
-             v-for="comment in post.comments"
-             :key="comment.id"
-        >
-          {{ comment }}
-        </div>
-      </div>
-
+      <comment v-show="post.comments"
+               :comment="post.comments"
+      />
     </div>
   </div>
 </template>

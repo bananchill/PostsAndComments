@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import TransformJson from '@/infrastructure/toolkit/transformationJSON'
+
+import {convert} from '@/infrastructure/toolkit/transformationJSON';
 
 export default {
   name: 'pageOnePost',
@@ -41,14 +42,12 @@ export default {
     },
     async getCommentsAsync () {
       try {
-        const res = await this.commentsApi.getInfoAsync(this.id)
-        this.$set(this.post, 'comments', res)
+        const res = await this.commentsApi.getInfoAsync(this.id);
+        this.$set(this.post, 'comments', res);
 
-        const transData = new TransformJson()
-        let comments = this.post.comments
-        console.log(comments)
-        if (comments) {
-          comments = transData.transDataJson(comments)
+        if ( this.post.comments) {
+          this.post.comments = convert( this.post.comments, {});
+          console.log(this.post.comments );
         }
       } catch (e) {
         console.error(`get comments failed: ${e}`)
