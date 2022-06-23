@@ -39,9 +39,11 @@ export default {
   width: 600px;
   background: darkgrey;
   border: 1rem;
+
   .groups__item {
     .groups__data__show {
-
+      .groups__desc {
+      }
     }
   }
 
