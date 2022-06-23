@@ -1,9 +1,9 @@
 /* eslint max-classes-per-file: ["error", 2] */
 
-import SHOW_COMMENTS_QUERY from './queries/showComments.graphql'
+import SHOW_GROUPS_QUERY from './queries/showGroups.graphql'
 
-class CommentsApiImpl {
-  name = 'comments';
+class GroupsApiImpl {
+  name = 'group';
 
   #pGqlAdapter = null;
 
@@ -18,19 +18,24 @@ class CommentsApiImpl {
     this.#pLog = _log;
   }
 
-  async getInfoAsync(_postId) {
-    const postId = parseInt(_postId, 10);
+  async getListAsync(_variables) {
+    const defaultParams = {
+      limit: 20,
+      tags: [],
+      page: 1,
+      sortType: 'NEW',
+    };
+    const variables = Object.assign(defaultParams, _variables);
     return await this.#pGqlAdapter.getQueryAsync({
-      variables: { postId },
-      query: SHOW_COMMENTS_QUERY,
-      operationDescription: `get ${_postId} comments`,
+      variables,
+      query: SHOW_GROUPS_QUERY,
+      operationDescription: 'get groups list',
     });
   }
 
-
 }
-export default class CommentsApiModule {
-  name = 'comment-api';
+export default class GroupsApiModule {
+  name = 'groups-api';
 
   #pLog = null;
 
@@ -39,8 +44,8 @@ export default class CommentsApiModule {
   }
 
   install(_app) {
-    _app.interfaces.register('commentsApi', () => {
-      return new CommentsApiImpl(this.#pLog, _app.gqlAdapter);
+    _app.interfaces.register('groupsApi', () => {
+      return new GroupsApiImpl(this.#pLog, _app.gqlAdapter);
     });
 
   }

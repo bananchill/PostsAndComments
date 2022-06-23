@@ -32,7 +32,6 @@
       </textarea>
         </div>
       </div>
-
       <comment v-show="post.comments"
                :comment="post.comments"
       />

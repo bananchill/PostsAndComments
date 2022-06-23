@@ -3,7 +3,6 @@
     class="u__comment"
   >
     <div class="u__comment_show"
-
     >
       {{ comment }}
     </div>
