@@ -1,0 +1,17 @@
+:root {
+  --textOnRed: #fff;
+  --textOnWhite: black;
+  --backgroundComp: #ff0040;
+  --backgroundWhite: #fff;
+  --colorGray: #707c8b; }
+
+.links__item {
+  cursor: pointer;
+  color: black;
+  text-decoration: none; }
+
+.image img {
+  width: 4rem;
+  height: 4rem; }
+
+/*# sourceMappingURL=total.css.map */

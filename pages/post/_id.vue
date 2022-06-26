@@ -43,7 +43,7 @@ export default {
     async getCommentsAsync () {
       try {
         const res = await this.commentsApi.getInfoAsync(this.id);
-        this.$set(this.post, 'comments', res);
+       await this.$set(this.post, 'comments', res);
 
         if ( this.post.comments) {
           this.post.comments = convert( this.post.comments, {});

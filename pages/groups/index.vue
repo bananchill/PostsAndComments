@@ -1,12 +1,18 @@
 <template>
   <div>
-   <div class="show__groups">
+    <div class="tabs">
+      <div class="show__tabs">
+        <span class="tab__title">Все сообщества </span>
+        <span class="tab__count"> {{ len }}</span>
+      </div>
+    </div>
+    <div class="show__groups">
       <group
         v-for="group in groups"
         :key="group.id"
         :group="group"
       />
-   </div>
+    </div>
   </div>
 </template>
 
@@ -16,12 +22,13 @@ import group from '@/components/group/group'
 
 export default {
   name: 'PAGE-GROUPS',
-  components:{
+  components: {
     group
   },
   data () {
     return {
       groups: null,
+      len: 0,
     }
   },
   computed: {
@@ -40,6 +47,7 @@ export default {
       try {
         const res = await this.groupsApi.getListAsync()
         this.groups = res.items
+        this.len = res.items.length
       } catch (e) {
         console.error(`get groups failed: ${e}`)
       }
@@ -47,3 +55,28 @@ export default {
   }
 }
 </script>
+<style append lang="scss">
+.tabs{
+  width: 10rem;
+  margin-bottom: 2rem;
+  .show__tabs {
+    background-color: var(--backgroundWhite);
+    border-radius: 1rem;
+    .tab__title{
+      margin: 0.1rem 0 0.1rem 0.7rem;
+      font-weight: 600;
+    }
+    .tab__count{
+      color: var(--colorGray) ;
+      font-weight: 300;
+      line-height: 20px;
+      font-family: 'TT Norms';
+      font-style: normal;
+    }
+  }
+
+}
+
+
+
+</style>
