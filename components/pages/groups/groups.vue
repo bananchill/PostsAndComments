@@ -3,7 +3,8 @@
     <nuxt-link :to="`/groups/group/${group.id}`" class="links__item">
       <div class="data__groups__info">
         <div class="image">
-          <img src="../../../static/groups/groups.jpg">
+          <img :src="group.avatar_url" v-if="group.avatar_url">
+          <img src="../../../static/groups/groups.jpg" v-else>
         </div>
         <div class="groups__data__show">
           <div class="groups__title">
@@ -96,6 +97,8 @@ export default {
 
     .button__join__groups {
       //width: 100%;
+      border-radius: 0.1rem;
+      padding: 0.2rem;
       max-width: 9.875rem;
     }
 

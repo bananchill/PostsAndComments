@@ -6,7 +6,8 @@
           <img src="../../../../static/groups/backGroup2.jpg" alt="">
         </div>
         <div class="view__img">
-          <img class="show__img" src="../../../../static/groups/groups.png">
+          <img class="show__img" :src="group.avatar_url" alt="" v-if="group.avatar_url">
+          <img class="show__img" src="../../../../static/groups/usersUn.jpg" alt="" v-else>
         </div>
       </div>
       <div class="group__data">
@@ -18,7 +19,8 @@
         </div>
         <div class="group__users">
           <div class="group__users__img">
-            <img class="users__img" src="../../../../static/groups/usersUn.jpg" alt="">
+            <img class="users__img" :src="group.avatar_url" alt="" v-if="group.avatar_url">
+            <img class="users__img" src="../../../../static/groups/usersUn.jpg" alt="" v-else>
           </div>
           <div class="group__users__count">
             <span>{{ group.members_count }}</span> <h6 class="label__users">участников</h6>
@@ -104,8 +106,9 @@ export default {
         border-radius: 0.5rem;
 
         .show__img {
-          width: 6rem;
-          height: 6rem;
+          border-radius: 0.5rem;
+          width: 5rem;
+          height: 5rem;
         }
       }
 
@@ -122,6 +125,9 @@ export default {
       .group__title {
 
         font-weight: 300;
+      }
+      .group__desc{
+
       }
 
     }
@@ -152,11 +158,12 @@ export default {
     }
 
     .button_question {
-      padding: 0;
+
       margin: 0.5rem;
       justify-content: space-between;
 
       .user__question {
+        padding: 0.15rem 0 0.15rem 0;
         border-radius: 0.3rem;
         width: 100%;
         background-color: var(--background100);

@@ -7,6 +7,7 @@ query SHOW_GROUPS_QUERY($sortType: GroupsSort = NEW, $filters: GroupsFilters = {
       user_id
       is_subscribed
       is_open
+      avatar_url
       members{
         id
         nickname

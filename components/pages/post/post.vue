@@ -2,17 +2,23 @@
   <div class="data__wrapper" v-if="post">
     <div class="data__item">
       <div class="s__question">
+        <div class="posts__avatar" v-if="post.image_url">
+          <img :src="post.image_url" alt="" class="avatar" >
+        </div>
         <nuxt-link :to="`/post/${post.id}`" class="links__item ">
-          <h3>
-            <span> {{ post.name }} </span>
-          </h3>
+          <div class="post__title">
+            <h3>
+              <span> {{ post.name }} </span>
+            </h3>
+          </div>
           <div class="data__text">
             <span> {{ post.text }} </span>
           </div>
         </nuxt-link>
         <div class="user">
           <div class="image">
-            <img src="../../../static/icon_user.png" alt="">
+            <img :src="post.owner.avatar_url" alt="" v-if="post.owner.avatar_url">
+            <img src="../../../static/groups/usersUn.jpg" alt="" v-else>
           </div>
           <div class="u__answer">
             <div class="user__about">
@@ -25,13 +31,13 @@
               </div>
             </div>
           </div>
-          <div class="button__label" >
+          <div class="button__label">
             <button class="question__button" v-on:click="visibleImpl(isVisible)">
               <span> Ответить </span>
             </button>
           </div>
         </div>
-        <div class="u__answer__div" v-show="isVisible" >
+        <div class="u__answer__div" v-show="isVisible">
           <div class="u__answer__editor__textarea">
              <textarea id="story"
                        name="story"
@@ -46,7 +52,7 @@
           </div>
         </div>
         <show-comment v-show="post.comments"
-                 :comment="post.comments"
+                      :comment="post.comments"
         />
       </div>
     </div>
@@ -56,6 +62,7 @@
 <script>
 
 import ShowComment from '@/components/pages/comment/comment'
+
 export default {
   name: 'AllPost',
   components: { ShowComment },
@@ -77,7 +84,7 @@ export default {
 
   },
   methods: {
-   visibleImpl (_isVisible) {
+    visibleImpl (_isVisible) {
       this.isVisible = !_isVisible
     }
   }
@@ -99,16 +106,31 @@ export default {
     background-color: var(--text100White);
     border-radius: 0.625rem;
 
+    .posts__avatar {
+      height: 9rem;
+      .avatar {
+        border-radius: 0.625rem;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
     .s__question {
-      margin: 0.2rem 0 1rem 1rem;
+      margin: 0.2rem 0 1rem;
       display: flex;
       flex-direction: column;
       border-radius: 1rem;
 
       .links__item {
+        margin: 0.5rem 0 0.5rem 1rem;
         .data__text {
+
           overflow-wrap: break-word;
           padding-right: 1rem;
+        }
+        .post__title{
+          margin-right: 0.5rem;
         }
       }
 
@@ -121,6 +143,10 @@ export default {
         display: flex;
         object-fit: cover;
         padding: 0.5rem;
+
+        & img {
+          border-radius: 1.5rem;
+        }
 
 
         .user__about {

@@ -2,7 +2,8 @@
   <div class="users__in__group">
     <div class="user__info">
       <div class="user__avatar">
-        <img class="show__img" src="../../../static/groups/groups.jpg">
+        <img class="show__img" :src="member.avatar_url" v-if="member.avatar_url"/>
+        <img class="show__img" src="../../../static/groups/usersUn.jpg" v-else/>
       </div>
       <div class="user__name">
         {{ member.first_name }}
@@ -23,6 +24,9 @@ export default {
   props: {
     member: null
   },
+  methods:{
+
+  }
 }
 </script>
 
@@ -50,6 +54,7 @@ export default {
   .user__add__friends{
     margin: 1rem 1rem 0 0;
     .button__add{
+      padding: 0 0.3rem 0 0.3rem;
       font-weight: 800;
     }
   }
