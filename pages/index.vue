@@ -1,6 +1,6 @@
 <template>
   <div class="data__item">
-    <post
+    <all-post
       v-for="post in posts"
       :post="post"
       :key="post.id"
@@ -9,8 +9,10 @@
 </template>
 
 <script>
+import AllPost from '@/components/pages/post/post'
 export default {
-  name: 'AllPost',
+  name: 'OnePost',
+  components: { AllPost },
   data () {
     return {
       posts: null,

@@ -12,9 +12,9 @@
         </nuxt-link>
         <div class="user">
           <div class="image">
-            <img src="../../static/icon_user.png" alt="">
+            <img src="../../../static/icon_user.png" alt="">
           </div>
-          <div class="u__answer__button">
+          <div class="u__answer">
             <div class="user__about">
               <div class="user__quest">
                 <span> Спрашивает </span>
@@ -25,19 +25,27 @@
               </div>
             </div>
           </div>
-          <div class="button__label">
-            <button class="question__button">
+          <div class="button__label" >
+            <button class="question__button" v-on:click="visibleImpl(isVisible)">
               <span> Ответить </span>
             </button>
           </div>
         </div>
-        <div class="u__answer">
+        <div class="u__answer__div" v-show="isVisible" >
           <div class="u__answer__editor__textarea">
-          <textarea id="story" name="story" placeholder="Введите ответ">
-      </textarea>
+             <textarea id="story"
+                       name="story"
+                       placeholder="Введите ответ"
+             >
+          </textarea>
+          </div>
+          <div class="u__answer__button">
+            <button class="answer__button">
+              <span> Отправить </span>
+            </button>
           </div>
         </div>
-        <comment v-show="post.comments"
+        <show-comment v-show="post.comments"
                  :comment="post.comments"
         />
       </div>
@@ -47,9 +55,10 @@
 
 <script>
 
+import ShowComment from '@/components/pages/comment/comment'
 export default {
-  name: 'OnePost',
-  components: {},
+  name: 'AllPost',
+  components: { ShowComment },
   props: {
     post: {
       type: [Object, null],
@@ -60,15 +69,16 @@ export default {
   data () {
     return {
       path: this.$route.path,
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      isVisible: false,
     }
   },
   mounted () {
-    this.transDataJson()
+
   },
   methods: {
-    transDataJson () {
-
+   visibleImpl (_isVisible) {
+      this.isVisible = !_isVisible
     }
   }
 }
@@ -78,22 +88,29 @@ export default {
 .data__wrapper {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  --layout-padding: 1.875rem;
-  /* Inside auto layout */
-  flex: none;
+  //flex: none;
   order: 1;
   flex-grow: 0;
+  //width: 60%;
+  width: 40rem;
+
 
   .data__item {
-    background-color: var(--textOnRed);
-    /* Inside auto layout */
+    background-color: var(--text100White);
     border-radius: 0.625rem;
+
     .s__question {
+      margin: 0.2rem 0 1rem 1rem;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
       border-radius: 1rem;
+
+      .links__item {
+        .data__text {
+          overflow-wrap: break-word;
+          padding-right: 1rem;
+        }
+      }
 
       & h3 {
         font-size: 1.75rem;
@@ -125,7 +142,7 @@ export default {
         .question__button {
           padding: 0 0.2rem;
           border: none;
-          background: var(--backgroundComp);
+          background: var(--background80);
           margin-right: 0.5rem;
           height: 2rem;
           border-radius: 0.3rem;
@@ -136,19 +153,50 @@ export default {
         }
 
         & span {
-          color: var(--textOnRed);
+          margin: 0.5rem;
+          color: var(--text100White);
         }
       }
 
       .u__answer {
         position: relative;
         margin: 1.25rem 0 0 1rem;
+        width: 70%;
+
+
+      }
+
+      .u__answer__div {
+        position: relative;
+        margin: 1.25rem 0 0 1rem;
+        width: 90%;
 
         #story {
           border-radius: 0.5rem;
           width: 100%;
           min-height: 5.5rem;
+          margin: 0 1rem 0 0.5rem;
           height: 100%;
+        }
+
+        .u__answer__button {
+          display: flex;
+          align-content: center;
+          justify-content: flex-end;
+
+          .answer__button {
+            padding: 0 0.2rem;
+            border: none;
+            background: var(--background80);
+            margin: 0.5rem;
+            height: 2rem;
+            border-radius: 0.3rem;
+
+            span {
+              margin: 0.5rem;
+              color: var(--text100White);
+            }
+          }
         }
       }
     }

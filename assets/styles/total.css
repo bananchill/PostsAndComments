@@ -1,9 +1,9 @@
 :root {
-  --textOnRed: #fff;
-  --textOnWhite: black;
-  --backgroundComp: #ff0040;
-  --backgroundWhite: #fff;
-  --colorGray: #707c8b; }
+  --text100White: #ffffff;
+  --text100Black: black;
+  --background80: #ff0040;
+  --background100: #ffffff;
+  --color80: #707c8b; }
 
 .links__item {
   cursor: pointer;
@@ -13,5 +13,12 @@
 .image img {
   width: 4rem;
   height: 4rem; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-size: auto;
+  background: #F5F5F5;
+  --layout-width: 96.25rem; }
 
 /*# sourceMappingURL=total.css.map */

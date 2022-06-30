@@ -1,15 +1,17 @@
 <template>
   <div>
-    <post v-if="post" :post="post"/>
+    <all-post v-if="post" :post="post"/>
   </div>
 </template>
 
 <script>
 
 import {convert} from '@/infrastructure/toolkit/transformationJSON';
+import AllPost from '@/components/pages/post/post'
 
 export default {
   name: 'pageOnePost',
+  components: { AllPost },
   data () {
     return {
       id: this.$route.params.id,
@@ -43,7 +45,7 @@ export default {
     async getCommentsAsync () {
       try {
         const res = await this.commentsApi.getInfoAsync(this.id);
-       await this.$set(this.post, 'comments', res);
+        this.$set(this.post, 'comments', res);
 
         if ( this.post.comments) {
           this.post.comments = convert( this.post.comments, {});

@@ -9,7 +9,7 @@
       :key="tab.id"
       @click="setActiveTab(tab)"
     >
-      <span>{{ tab.title }}</span>
+      <span class="community__title">{{ tab.title }}</span>
     </nuxt-link>
   </div>
 </template>
@@ -54,7 +54,7 @@ export default {
 .menu__community {
   display: flex;
   justify-content: space-between;
-  background: var(--backgroundWhite);
+  background: var(--background100);
   border: 0.1rem solid aliceblue;
   border-radius: 3rem;
   height: 3rem;
@@ -62,29 +62,33 @@ export default {
   font-size: 16px;
 
   .nuxt-link-exact-active {
-    background: var(--backgroundComp);
+    background: var(--background80);
     span{
       color: var(--textOnRed);
     }
   }
   .view__community {
     height: 3rem;
-    //align-content: center;
     color: var(--textOnWhite);
     text-decoration: none;
-    text-align: center;
+    //text-align: center;
     font-size: 16px;
     border-radius: 3rem;
     flex: 1;
     font-style: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .community__title{
 
+    }
     &:not(:first-child) {
       color: var(--textOnWhite);
       margin: 0 .25rem 0 .25rem;
     }
 
     &:hover {
-      background: var(--backgroundComp);
+      background: var(--background80);
       color: var(--textOnRed);
     }
     &:not(:first-child)  .nuxt-link-exact-active {

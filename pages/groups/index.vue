@@ -18,7 +18,7 @@
 
 <script>
 
-import group from '@/components/group/group'
+import group from '@/components/pages/groups/groups'
 
 export default {
   name: 'PAGE-GROUPS',
@@ -60,7 +60,7 @@ export default {
   width: 10rem;
   margin-bottom: 2rem;
   .show__tabs {
-    background-color: var(--backgroundWhite);
+    background-color: var(--background100);
     border-radius: 1rem;
     .tab__title{
       margin: 0.1rem 0 0.1rem 0.7rem;

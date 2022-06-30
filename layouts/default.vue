@@ -26,12 +26,11 @@ template {
 }
 
 .all {
-  background: #F5F5F5;
+
+  gap: 32px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 32px;
-  --layout-width: 96.25rem;
   padding: 1.875rem;
 }
 </style>

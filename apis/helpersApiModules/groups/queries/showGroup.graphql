@@ -1,0 +1,27 @@
+query SHOW_GROUP_QUERY($groupId: Int!, $members_per_page: Int = 20, $members_page: Int = 1) {
+  showGroupByID(id: $groupId, members_per_page: $members_per_page, members_page: $members_page) {
+    group{
+      id
+      is_subscribed
+      is_open
+      name
+      description
+      reposts_count
+      tags{
+        id
+        name
+        description
+        reposts_count
+      }
+      members_count
+      members{
+        id
+        nickname
+        first_name
+        last_name
+        avatar_url
+        about_me
+      }
+    }
+  }
+}
