@@ -3,7 +3,7 @@
     <div class="user__info">
       <div class="user__avatar">
         <img class="show__img" :src="member.avatar_url" v-if="member.avatar_url"/>
-        <img class="show__img" src="../../../static/groups/usersUn.jpg" v-else/>
+        <img class="show__img" src="/static/groups/usersUn.jpg" v-else/>
       </div>
       <div class="user__name">
         {{ member.first_name }}
@@ -14,7 +14,6 @@
         <span>&plus;</span>
       </button>
     </div>
-
   </div>
 </template>
 

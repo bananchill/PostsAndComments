@@ -1,6 +1,7 @@
 import Application from '~/infrastructure/application/app';
 
 import ApiPack from '~/apis/apiPack';
+import Vue from 'vue'
 
 export default (context, inject) => {
   // ************************
@@ -18,9 +19,12 @@ export default (context, inject) => {
 
   appLogUngroup();
 
+
   // ************************
   // Running app
   // ************************
   app.run();
   inject('sApp', app);
-};
+  inject('eventBus', new Vue());
+
+}

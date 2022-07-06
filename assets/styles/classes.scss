@@ -1,11 +1,45 @@
-.links__item{
+.links__item {
   cursor: pointer;
   color: black;
   text-decoration: none;
 }
-.image img{
+
+.image img {
   width: 4rem;
   height: 4rem;
 }
+
+
+// popups
+.not__auth__popup, .auth__popup {
+  word-wrap: break-word;
+  width: 100%;
+  min-height: 100%;
+  padding: 1rem;
+  font-size: 30px;
+  color: var(--text100Black);
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+
+  & .auth__popup__content, .not__auth__popup__content {
+    margin: 4rem auto 2rem auto;
+    width: fit-content;
+    height: 100%;
+    padding: 1rem;
+    background-color: #c5c5c5;
+    border-radius: 5px;
+    box-shadow: 0 0 1rem #000;
+    background: var(--background100);
+  }
+  .info__block {
+    text-align: center;
+  }
+  span{
+    margin-top: auto  ;
+  }
+}
+
 
 

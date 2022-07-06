@@ -15,7 +15,8 @@
           <h2>{{ group.name }}</h2>
         </div>
         <div class="group__desc">
-          {{ group.description }}
+          <span>     {{ group.description }}</span>
+
         </div>
         <div class="group__users">
           <div class="group__users__img">
@@ -78,7 +79,7 @@ export default {
     align-self: start;
     border-radius: 1rem 1rem 0 0;
     background: var(--background100);
-    width: 60%;
+
     max-height: content-box;
     padding-bottom: 1rem;
 
@@ -123,11 +124,14 @@ export default {
       word-wrap: break-word;
 
       .group__title {
-
         font-weight: 300;
       }
-      .group__desc{
 
+      .group__desc {
+        & span {
+          overflow: hidden;
+          text-overflow: clip;
+        }
       }
 
     }
@@ -158,7 +162,6 @@ export default {
     }
 
     .button_question {
-
       margin: 0.5rem;
       justify-content: space-between;
 
@@ -175,7 +178,7 @@ export default {
     width: 40%;
     margin-left: 3rem;
 
-    .users__in__group{
+    .users__in__group {
       background-color: var(--background100);
       border-radius: 0.5rem;
     }

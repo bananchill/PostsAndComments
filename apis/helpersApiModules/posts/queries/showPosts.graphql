@@ -34,7 +34,7 @@ query SHOW_POSTS_QUERY($sortType: PostsSort = NEW, $filters: PostsFilters = { ta
 #        rating
 #        parent_id
 #      }
-#      comments_count
+      comments_count
       reposts_count
       is_liked
       is_favorite

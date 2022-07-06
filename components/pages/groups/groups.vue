@@ -17,19 +17,23 @@
             {{ group.members_count }} Подписчика
           </div>
         </div>
-        <div v-if="!group.is_subscribed" class="button__join__groups">
-          <button class="button__group" type="button">&plus;
-            <span class="button__label">Подписаться</span>
-          </button>
-        </div>
-        <div v-else class="button__signatory__groups">
-          <button class="button__group" type="button">&bigvee;
-            <span class="button__label">Вы Подписаны</span>
-          </button>
-        </div>
+
       </div>
     </nuxt-link>
     <div/>
+    <div class="button__subscribes">
+      <div v-if="!group.is_subscribed" class="button__join__groups">
+        <button class="button__group" type="button">&plus;
+          <span class="button__label">Подписаться</span>
+        </button>
+      </div>
+      <div v-else class="button__signatory__groups">
+        <button class="button__group" type="button">&bigvee;
+          <span class="button__label">Вы Подписаны</span>
+        </button>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -52,39 +56,55 @@ export default {
 
 <style scoped lang="scss">
 .show__groups {
+  display: flex;
   background: var(--background100);
   border: 1rem;
   border-radius: 0.625rem;
   padding: 0.5rem 1rem;
-  width: 100%;
+  width: 60%;
 
-  .data__groups__info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 1rem auto;
-    grid-gap: 1rem;
-    gap: 1rem;
-    border-radius: 0;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .links__item {
+
+    word-wrap: break-word;
+
+    .data__groups__info {
+      box-sizing: content-box;
+      display: flex;
+      //justify-content: space-between;
+      align-items: center;
+      margin: 1rem auto;
+      grid-gap: 1rem;
+      gap: 1rem;
+      border-radius: 0;
 
 
-    .groups__data__show {
-      .groups__subscribers {
-        font-weight: 400;
-        color: var(--color80);
+      .groups__data__show {
+        .groups__subscribers {
+          font-weight: 400;
+          color: var(--color80);
+        }
+
+        .groups__desc {
+
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-weight: 400;
+          font-size: 14px;
+          color: var(--color80);
+        }
+
       }
-
-      .groups__desc {
-        word-wrap: break-word;
-        width: 35rem;
-        font-weight: 400;
-        font-size: 14px;
-        color: var(--color80);
-      }
-
     }
+  }
+
+  .button__subscribes {
 
     .button__signatory__groups, .button__join__groups {
+
       margin: 0.5rem;
       background: #efefef;
       height: 2rem;
@@ -97,12 +117,14 @@ export default {
 
     .button__join__groups {
       //width: 100%;
-      border-radius: 0.1rem;
+      border-radius: 0.3rem;
       padding: 0.2rem;
       max-width: 9.875rem;
     }
 
     .button__group {
+      border-radius: 0.3rem;
+      padding: 0.2rem;
       border: none;
       height: 2rem;
 

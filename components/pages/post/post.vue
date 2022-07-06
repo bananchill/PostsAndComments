@@ -3,7 +3,7 @@
     <div class="data__item">
       <div class="s__question">
         <div class="posts__avatar" v-if="post.image_url">
-          <img :src="post.image_url" alt="" class="avatar" >
+          <img :src="post.image_url" alt="" class="avatar">
         </div>
         <nuxt-link :to="`/post/${post.id}`" class="links__item ">
           <div class="post__title">
@@ -20,6 +20,7 @@
             <img :src="post.owner.avatar_url" alt="" v-if="post.owner.avatar_url">
             <img src="../../../static/groups/usersUn.jpg" alt="" v-else>
           </div>
+
           <div class="u__answer">
             <div class="user__about">
               <div class="user__quest">
@@ -39,22 +40,24 @@
         </div>
         <div class="u__answer__div" v-show="isVisible">
           <div class="u__answer__editor__textarea">
-             <textarea id="story"
+             <textarea class="story"
                        name="story"
                        placeholder="Введите ответ"
              >
           </textarea>
           </div>
           <div class="u__answer__button">
-            <button class="answer__button">
+            <button class="answer__button" @click="sendAnswer()">
               <span> Отправить </span>
             </button>
           </div>
         </div>
         <show-comment v-show="post.comments"
                       :comment="post.comments"
+                      class="post__comment"
         />
       </div>
+
     </div>
   </div>
 </template>
@@ -86,6 +89,9 @@ export default {
   methods: {
     visibleImpl (_isVisible) {
       this.isVisible = !_isVisible
+    },
+    sendAnswer () {
+      this.$eventBus.$emit('my-custom-event')
     }
   }
 }
@@ -98,9 +104,6 @@ export default {
   //flex: none;
   order: 1;
   flex-grow: 0;
-  //width: 60%;
-  width: 40rem;
-
 
   .data__item {
     background-color: var(--text100White);
@@ -108,6 +111,7 @@ export default {
 
     .posts__avatar {
       height: 9rem;
+
       .avatar {
         border-radius: 0.625rem;
         height: 100%;
@@ -121,15 +125,17 @@ export default {
       display: flex;
       flex-direction: column;
       border-radius: 1rem;
+      width: 100%;
 
       .links__item {
         margin: 0.5rem 0 0.5rem 1rem;
-        .data__text {
 
+        .data__text {
           overflow-wrap: break-word;
           padding-right: 1rem;
         }
-        .post__title{
+
+        .post__title {
           margin-right: 0.5rem;
         }
       }
@@ -139,10 +145,12 @@ export default {
       }
 
       .user {
-        align-items: center;
         display: flex;
+        align-items: center;
         object-fit: cover;
         padding: 0.5rem;
+        width: 100%;
+
 
         & img {
           border-radius: 1.5rem;
@@ -160,6 +168,7 @@ export default {
       }
 
       .button__label {
+        align-self: end;
         display: flex;
         align-content: center;
         justify-content: flex-end;
@@ -168,7 +177,7 @@ export default {
         .question__button {
           padding: 0 0.2rem;
           border: none;
-          background: var(--background80);
+          background: var(--background80Red);
           margin-right: 0.5rem;
           height: 2rem;
           border-radius: 0.3rem;
@@ -188,8 +197,6 @@ export default {
         position: relative;
         margin: 1.25rem 0 0 1rem;
         width: 70%;
-
-
       }
 
       .u__answer__div {
@@ -197,11 +204,12 @@ export default {
         margin: 1.25rem 0 0 1rem;
         width: 90%;
 
-        #story {
+        .story {
           border-radius: 0.5rem;
           width: 100%;
           min-height: 5.5rem;
           margin: 0 1rem 0 0.5rem;
+          padding: 0.3rem;
           height: 100%;
         }
 
@@ -213,7 +221,7 @@ export default {
           .answer__button {
             padding: 0 0.2rem;
             border: none;
-            background: var(--background80);
+            background: var(--background80Red);
             margin: 0.5rem;
             height: 2rem;
             border-radius: 0.3rem;
@@ -231,6 +239,11 @@ export default {
   &:not(:first-child) {
     margin-top: 2rem;
   }
+
+}
+
+.post__comment {
+  padding: 1rem;
 }
 
 </style>

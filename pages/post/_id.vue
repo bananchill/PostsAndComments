@@ -1,17 +1,37 @@
 <template>
-  <div>
-    <all-post v-if="post" :post="post"/>
+  <div class="main__block">
+    <div class="show__all__posts">
+      <all-post
+        v-if="post"
+        :post="post"
+        :key="post.id"
+        class="show__post"
+      />
+    </div>
+    <div class="all__popular__posts">
+      <div class="title__blocks">
+        <h3>Популярные вопросы</h3>
+      </div>
+      <div class="popular__posts">
+        <popularPost/>
+      </div>
+
+    </div>
   </div>
 </template>
 
 <script>
 
-import {convert} from '@/infrastructure/toolkit/transformationJSON';
+import { convert } from '@/infrastructure/toolkit/transformationJSON'
 import AllPost from '@/components/pages/post/post'
+import popularPost from '@/components/pages/post/popular/popularPost'
 
 export default {
   name: 'pageOnePost',
-  components: { AllPost },
+  components: {
+    AllPost,
+    popularPost
+  },
   data () {
     return {
       id: this.$route.params.id,
@@ -44,12 +64,12 @@ export default {
     },
     async getCommentsAsync () {
       try {
-        const res = await this.commentsApi.getInfoAsync(this.id);
-        this.$set(this.post, 'comments', res);
+        const res = await this.commentsApi.getInfoAsync(this.id)
+        this.$set(this.post, 'comments', res)
 
-        if ( this.post.comments) {
-          this.post.comments = convert( this.post.comments, {});
-          console.log(this.post.comments );
+        if (this.post.comments) {
+          this.post.comments = convert(this.post.comments, {})
+          console.log(this.post.comments)
         }
       } catch (e) {
         console.error(`get comments failed: ${e}`)
@@ -59,6 +79,27 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
+.main__block {
+  display: flex;
+
+  .show__all__posts {
+    width: 60%;
+  }
+
+  .all__popular__posts {
+    margin-left: 1rem;
+    width: 40%;
+
+    .title__blocks {
+      font-weight: 400;
+    }
+
+    .popular__posts {
+      margin-top: 0.5rem;
+    }
+
+  }
+}
 </style>

@@ -35,7 +35,9 @@ class PostsApiImpl {
       page: 1,
       sortType: 'NEW',
     };
+
     const variables = Object.assign(defaultParams, _variables);
+    console.log(variables)
     return await this.#pGqlAdapter.getQueryAsync({
       variables,
       query: SHOW_POSTS_QUERY,

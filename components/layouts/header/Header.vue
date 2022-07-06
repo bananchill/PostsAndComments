@@ -62,7 +62,7 @@ export default {
   font-size: 16px;
 
   .nuxt-link-exact-active {
-    background: var(--background80);
+    background: var(--background80Red);
     span{
       color: var(--textOnRed);
     }
@@ -88,7 +88,7 @@ export default {
     }
 
     &:hover {
-      background: var(--background80);
+      background: var(--background80Red);
       color: var(--textOnRed);
     }
     &:not(:first-child)  .nuxt-link-exact-active {
