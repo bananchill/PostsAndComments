@@ -12,7 +12,6 @@ query SHOW_COMMENTS_QUERY($postId: Int!) {
     text
     rating
     parent_id
-
   }
 }
 

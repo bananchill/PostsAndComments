@@ -15,7 +15,7 @@
           <h2>{{ group.name }}</h2>
         </div>
         <div class="group__desc">
-          <span>     {{ group.description }}</span>
+          <span>{{ group.description }}</span>
 
         </div>
         <div class="group__users">
@@ -64,7 +64,7 @@ export default {
   props: {
     group: null
   },
-  data () {
+  data() {
     return {}
   }
 }
@@ -83,6 +83,12 @@ export default {
     max-height: content-box;
     padding-bottom: 1rem;
 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    width: 90%;
+
     .img__items {
       //padding: 0.5rem 1rem;
       display: flex;
@@ -91,11 +97,14 @@ export default {
 
 
       .img__group {
+        object-fit: fill;
+        width: 100%;
+        height: 100%;
+
         img {
-          border-radius: 1rem 1rem 0 0;
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          border-radius: 1rem 1rem 0 0;
         }
 
       }
@@ -120,6 +129,7 @@ export default {
     }
 
     .group__data {
+
       margin: 1rem;
       word-wrap: break-word;
 
@@ -128,10 +138,7 @@ export default {
       }
 
       .group__desc {
-        & span {
-          overflow: hidden;
-          text-overflow: clip;
-        }
+        margin-right: 1rem;
       }
 
     }

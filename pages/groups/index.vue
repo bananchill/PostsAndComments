@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="show__groups">
-      <group
+      <groups
         v-for="group in groups"
         :key="group.id"
         :group="group"
@@ -18,12 +18,12 @@
 
 <script>
 
-import group from '@/components/pages/groups/groups'
+import groups from '@/components/pages/groups/groups'
 
 export default {
   name: 'PAGE-GROUPS',
   components: {
-    group
+    groups
   },
   data () {
     return {

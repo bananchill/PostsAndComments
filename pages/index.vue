@@ -64,10 +64,8 @@ export default {
           limit: 3,
           sortType: 'POPULAR'
         }
-
         const res = await this.postsApi.getListAsync(variables)
         this.posts = res.items
-        console.log(res.items)
       } catch (e) {
         console.error(`get posts failed: ${e}`)
       }

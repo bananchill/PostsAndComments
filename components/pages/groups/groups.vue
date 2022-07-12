@@ -11,7 +11,7 @@
             {{ group.name }}
           </div>
           <div class="groups__desc">
-            {{ group.description }}
+            <h5> {{ group.description }}</h5>
           </div>
           <div class="groups__subscribers">
             {{ group.members_count }} Подписчика
@@ -48,7 +48,7 @@ export default {
       default: null
     }
   },
-  data () {
+  data() {
     return {}
   }
 }
@@ -61,37 +61,31 @@ export default {
   border: 1rem;
   border-radius: 0.625rem;
   padding: 0.5rem 1rem;
-  width: 60%;
-
+  width: 80%;
   flex-direction: row;
   justify-content: space-between;
 
   .links__item {
-
-    word-wrap: break-word;
+    width: 80%;
 
     .data__groups__info {
       box-sizing: content-box;
       display: flex;
-      //justify-content: space-between;
       align-items: center;
       margin: 1rem auto;
       grid-gap: 1rem;
       gap: 1rem;
       border-radius: 0;
 
-
       .groups__data__show {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
         .groups__subscribers {
           font-weight: 400;
           color: var(--color80);
         }
-
         .groups__desc {
-
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
           font-weight: 400;
           font-size: 14px;
           color: var(--color80);
@@ -102,9 +96,11 @@ export default {
   }
 
   .button__subscribes {
+    width: 20%;
+    align-self: center;
+    margin :auto;
 
     .button__signatory__groups, .button__join__groups {
-
       margin: 0.5rem;
       background: #efefef;
       height: 2rem;
@@ -129,6 +125,7 @@ export default {
       height: 2rem;
 
       .button__label {
+
         padding-left: 0.5rem;
         white-space: nowrap;
         flex-grow: unset;

@@ -69,8 +69,8 @@ export default {
 
         if (this.post.comments) {
           this.post.comments = convert(this.post.comments, {})
-          console.log(this.post.comments)
         }
+        console.log(this.post.comments)
       } catch (e) {
         console.error(`get comments failed: ${e}`)
       }

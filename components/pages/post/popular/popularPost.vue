@@ -59,7 +59,6 @@ export default {
 
         const res = await this.postsApi.getListAsync(variables)
         this.posts = res.items
-        console.log(res.items)
       } catch (e) {
         console.error(`get posts failed: ${e}`)
       }

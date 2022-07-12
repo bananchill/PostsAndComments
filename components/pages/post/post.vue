@@ -2,10 +2,11 @@
   <div class="data__wrapper" v-if="post">
     <div class="data__item">
       <div class="s__question">
-        <div class="posts__avatar" v-if="post.image_url">
-          <img :src="post.image_url" alt="" class="avatar">
-        </div>
+
         <nuxt-link :to="`/post/${post.id}`" class="links__item ">
+          <div class="posts__avatar" v-if="post.image_url">
+            <img :src="post.image_url" alt="" class="avatar">
+          </div>
           <div class="post__title">
             <h3>
               <span> {{ post.name }} </span>
@@ -33,12 +34,12 @@
             </div>
           </div>
           <div class="button__label">
-            <button class="question__button" v-on:click="visibleImpl(isVisible)">
+            <button class="question__button" @click="visibleAnswerButtonImpl(isVisibleAnswerButton)">
               <span> Ответить </span>
             </button>
           </div>
         </div>
-        <div class="u__answer__div" v-show="isVisible">
+        <div class="u__answer__div" v-show="isVisibleAnswerButton">
           <div class="u__answer__editor__textarea">
              <textarea class="story"
                        name="story"
@@ -47,19 +48,26 @@
           </textarea>
           </div>
           <div class="u__answer__button">
-            <button class="answer__button" @click="sendAnswer()">
+            <button class="answer__button">
               <span> Отправить </span>
             </button>
           </div>
         </div>
-        <show-comment v-show="post.comments"
-                      :comment="post.comments"
-                      class="post__comment"
-        />
       </div>
 
     </div>
+    <template v-if="post.comments  && post.comments.children">
+      <div class="user__comment">
+        <ShowComment v-for="comment in post.comments.children"
+                     :comment="comment"
+                     :key="comment.id"
+                     class="post__comment"
+        />
+      </div>
+    </template>
+
   </div>
+
 </template>
 
 <script>
@@ -68,7 +76,7 @@ import ShowComment from '@/components/pages/comment/comment'
 
 export default {
   name: 'AllPost',
-  components: { ShowComment },
+  components: {ShowComment},
   props: {
     post: {
       type: [Object, null],
@@ -76,21 +84,28 @@ export default {
       default: null
     },
   },
-  data () {
+  data() {
     return {
       path: this.$route.path,
       id: this.$route.params.id,
-      isVisible: false,
+      isVisibleAnswerButton: false,
     }
   },
-  mounted () {
+  mounted() {
 
   },
   methods: {
-    visibleImpl (_isVisible) {
-      this.isVisible = !_isVisible
+    visibleAnswerButtonImpl: (_isVisible) => {
+      if (this.isAuthAccount())
+        this.isVisibleAnswerButton = !_isVisible
+      else
+        this.sendAnswer()
     },
-    sendAnswer () {
+    isAuthAccount: () => {
+      return false;
+    }
+    ,
+    sendAnswer: () => {
       this.$eventBus.$emit('my-custom-event')
     }
   }
@@ -101,7 +116,7 @@ export default {
 .data__wrapper {
   display: flex;
   flex-direction: column;
-  //flex: none;
+
   order: 1;
   flex-grow: 0;
 
@@ -109,16 +124,6 @@ export default {
     background-color: var(--text100White);
     border-radius: 0.625rem;
 
-    .posts__avatar {
-      height: 9rem;
-
-      .avatar {
-        border-radius: 0.625rem;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-      }
-    }
 
     .s__question {
       margin: 0.2rem 0 1rem;
@@ -128,15 +133,27 @@ export default {
       width: 100%;
 
       .links__item {
-        margin: 0.5rem 0 0.5rem 1rem;
+
+        .posts__avatar {
+          height: 9rem;
+          margin: 0;
+
+          .avatar {
+            border-radius: 0.625rem;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+        }
 
         .data__text {
+          margin: 0.5rem 0 0.5rem 1rem;
           overflow-wrap: break-word;
           padding-right: 1rem;
         }
 
         .post__title {
-          margin-right: 0.5rem;
+          margin: 0.5rem 1rem 0.5rem 1rem;
         }
       }
 
@@ -146,7 +163,7 @@ export default {
 
       .user {
         display: flex;
-        align-items: center;
+        align-content: center;
         object-fit: cover;
         padding: 0.5rem;
         width: 100%;
@@ -158,6 +175,7 @@ export default {
 
 
         .user__about {
+
           padding: 0 0 0 0.5rem;
         }
 
@@ -168,9 +186,9 @@ export default {
       }
 
       .button__label {
-        align-self: end;
+
         display: flex;
-        align-content: center;
+        align-self: center;
         justify-content: flex-end;
         padding: 0 0.625rem 0.625rem;
 
@@ -194,6 +212,7 @@ export default {
       }
 
       .u__answer {
+
         position: relative;
         margin: 1.25rem 0 0 1rem;
         width: 70%;
@@ -211,6 +230,7 @@ export default {
           margin: 0 1rem 0 0.5rem;
           padding: 0.3rem;
           height: 100%;
+          resize: none;
         }
 
         .u__answer__button {
@@ -239,6 +259,7 @@ export default {
   &:not(:first-child) {
     margin-top: 2rem;
   }
+
 
 }
 
